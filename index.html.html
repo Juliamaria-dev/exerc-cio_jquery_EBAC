@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <form id="taskForm">
+        <input type="text" id="taskInput" placeholder="Adicionar nova tarefa">
+        <button type="submit">Adicionar</button>
+    </form>
+    <ul id="taskList">
+        <!-- As tarefas serão adicionadas aqui -->
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            // Adiciona tarefa ao clicar no botão "Adicionar"
+            $('#taskForm').submit(function(e) {
+                e.preventDefault();
+                var taskName = $('#taskInput').val();
+                if (taskName.trim() === '') {
+                    alert('Por favor, insira o nome da tarefa.');
+                    return;
+                }
+                $('#taskList').append('<li>' + taskName + '</li>');
+                $('#taskInput').val(''); // Limpa o campo de input após adicionar a tarefa
+            });
+
+            // Marca tarefa como concluída ao clicar nela
+            $(document).on('click', 'li', function() {
+                $(this).toggleClass('completed');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
